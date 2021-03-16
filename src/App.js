@@ -1,5 +1,6 @@
 import {style} from './App.css';
 import React from 'react';
+import axios from 'axios'
 
 class App extends React.Component {
   constructor(props) {
@@ -16,11 +17,16 @@ class App extends React.Component {
     this.setState({
       messages : updatedState
     })
+    axios.post("http://localhost:3001/", this.state.messages).then(res => {
+      console.log(res.data);
+      this.setState({
+        response: res.data
+      })
+    }).catch(e => {
+      console.error(e);
+    })
   }
   
-  
-
-
   render() {
     return(
       <div>
